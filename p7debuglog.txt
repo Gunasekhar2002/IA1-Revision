@@ -1,0 +1,128 @@
+ gcc -g p7final.c; ./a.out
+p7final.c:8:1: error: unknown type name ‘Complex’; did you mean ‘_complex’?
+ Complex input()
+ ^~~~~~~
+ _complex
+p7final.c: In function ‘input’:
+p7final.c:10:2: error: unknown type name ‘Complex’; did you mean ‘_complex’?
+  Complex Complex;
+  ^~~~~~~
+  _complex
+p7final.c:12:24: error: request for member ‘real’ in something not a structure or union
+  scanf("%f %f",&Complex.real,&Complex.imaginary);
+                        ^
+p7final.c:12:38: error: request for member ‘imaginary’ in something not a structure or union
+  scanf("%f %f",&Complex.real,&Complex.imaginary);
+                                      ^
+p7final.c: At top level:
+p7final.c:15:1: error: unknown type name ‘Complex’; did you mean ‘_complex’?
+ Complex add(Complex a,Complex b)
+ ^~~~~~~
+ _complex
+p7final.c:15:13: error: unknown type name ‘Complex’; did you mean ‘_complex’?
+ Complex add(Complex a,Complex b)
+             ^~~~~~~
+             _complex
+p7final.c:15:23: error: unknown type name ‘Complex’; did you mean ‘_complex’?
+ Complex add(Complex a,Complex b)
+                       ^~~~~~~
+                       _complex
+p7final.c:25:13: error: unknown type name ‘Complex’; did you mean ‘_complex’?
+ void output(Complex a,Complex b,Complex c)
+             ^~~~~~~
+             _complex
+p7final.c:25:23: error: unknown type name ‘Complex’; did you mean ‘_complex’?
+ void output(Complex a,Complex b,Complex c)
+                       ^~~~~~~
+                       _complex
+ gcc -g p7final.c; ./a.out
+enter the complex number:2 3
+enter the complex number:4 5
+sum of two complex numbers is:
+2.0 + 4.0i + 3.0 + 5.0i = 6.0 + 8.0i 
+ gdb a.out
+GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from a.out...done.
+(gdb) b main
+Breakpoint 1 at 0x88d: file p7final.c, line 35.
+(gdb) r
+Starting program: /home/runner/IA1-Revision/a.out 
+warning: Error disabling address space randomization: Operation not permitted
+
+Breakpoint 1, main () at p7final.c:35
+35      a=input();
+(gdb) s
+input () at p7final.c:9
+9   {
+(gdb) n
+11      printf("enter the complex number:");
+(gdb) n
+12      scanf("%f %f",&Complex.real,&Complex.imaginary);
+(gdb) n
+enter the complex number:2  3
+13      return Complex;
+(gdb) p Complex
+$1 = {real = 2, imaginary = 3}
+(gdb) n
+14  }
+(gdb) n
+main () at p7final.c:36
+36      b=input();
+(gdb) s
+input () at p7final.c:9
+9   {
+(gdb) n
+11      printf("enter the complex number:");
+(gdb) n
+12      scanf("%f %f",&Complex.real,&Complex.imaginary);
+(gdb) n
+enter the complex number:4 5
+13      return Complex;
+(gdb) p Complex
+$2 = {real = 4, imaginary = 5}
+(gdb) n
+14  }
+(gdb) n
+main () at p7final.c:37
+37      c=add(a,b);
+(gdb) s
+add (a=..., b=...) at p7final.c:18
+18      sum.real=a.real+b.real;
+(gdb) n
+19      sum.imaginary=a.imaginary+b.imaginary;
+(gdb) n
+21      return sum;
+(gdb) p sum
+$3 = {real = 6, imaginary = 8}
+(gdb) n
+23  }
+(gdb) n
+main () at p7final.c:40
+40      output(a,b,c);
+(gdb) s
+output (a=..., b=..., c=...) at p7final.c:28
+28    printf("sum of two complex numbers is:\n");
+(gdb) n
+sum of two complex numbers is:
+29    printf("%.1f + %.1fi + %.1f + %.1fi = %.1f + %.1fi",a.real,b.real,a.imaginary,b.imaginary,c.real,c.imaginary);
+(gdb) n
+31  }
+(gdb) n
+main () at p7final.c:42
+42  }(gdb) c
+Continuing.
+2.0 + 4.0i + 3.0 + 5.0i = 6.0 + 8.0i[Inferior 1 (process 280) exited normally]
+(gdb) 
