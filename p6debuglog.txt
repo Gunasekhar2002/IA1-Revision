@@ -1,0 +1,79 @@
+ gcc -g p6final.c; ./a.out
+p6final.c:8:5: error: conflicting types for ‘strcmp’
+ int strcmp(char *a, char *b)
+     ^~~~~~
+In file included from p6final.c:2:0:
+/usr/include/string.h:136:12: note: previous declaration of ‘strcmp’ was here
+ gcc -g p6final.c; ./a.out
+enter the strings for a & b:hello world
+world is greater than hello 
+ gdb a.out
+GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from a.out...done.
+(gdb) b main
+Breakpoint 1 at 0x8d4: file p6final.c, line 49.
+(gdb) r
+Starting program: /home/runner/IA1-Revision/a.out 
+warning: Error disabling address space randomization: Operation not permitted
+
+Breakpoint 1, main () at p6final.c:49
+49  {
+(gdb) n
+51      input_two_strings(a,b);
+(gdb) s
+input_two_strings (a=0x7ffcf24e9d70 "\230zlho\177", 
+    b=0x7ffcf24e9ca0 "\001") at p6final.c:5
+5       printf("enter the strings for a & b:");
+(gdb) n 
+6       scanf("%s %s",a,b);
+(gdb) n
+enter the strings for a & b:hello world
+8   }
+(gdb) n
+main () at p6final.c:52
+52      int res=strcmp(a,b);
+(gdb) s
+strcmp (a=0x7ffcf24e9d70 "hello", 
+    b=0x7ffcf24e9ca0 "world") at p6final.c:12
+12      for (int i=0;a[i]!='\0' && b[i]!='\0';i++)
+(gdb) n
+14          if (a[i]>b[i])
+(gdb) n
+18          if (a[i]<b[i])
+(gdb) n
+20              return -1;
+(gdb) n
+27  }
+(gdb) n
+main () at p6final.c:53
+53      output(a,b,res);
+(gdb) s
+output (a=0x7ffcf24e9d70 "hello", 
+    b=0x7ffcf24e9ca0 "world", result=-1)
+    at p6final.c:31
+31      if (result==1)
+(gdb) n
+36      else if(result==-1)
+(gdb) n
+38          printf("%s is greater than %s",b,a);
+(gdb) n
+46  }
+(gdb) n
+main () at p6final.c:55
+55  } (gdb) c
+Continuing.
+world is greater than hello[Inferior 1 (process 96) exited normally]
+(gdb) 
