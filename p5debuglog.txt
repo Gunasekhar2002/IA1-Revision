@@ -1,0 +1,74 @@
+ gcc -g p5final.c; ./a.out
+/tmp/ccFaHGAe.o: In function `my_sqrt':
+/home/runner/IA1-Revision/p5final.c:13: undefined reference to `sqrt'
+collect2: error: ld returned 1 exit status
+sh: 1: ./a.out: not found
+exit status 127
+ gcc -g p5final.c -lm
+ ./a.out
+enter a number:100
+the square root of a given number 100.000000 is 10.000000 
+ gdb a.out
+GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from a.out...done.
+(gdb) b main
+Breakpoint 1 at 0x844: file p5final.c, line 24.
+(gdb) r
+Starting program: /home/runner/IA1-Revision/a.out 
+warning: Error disabling address space randomization: Operation not permitted
+
+Breakpoint 1, main () at p5final.c:24
+24    nsq=input();
+(gdb) s
+input () at p5final.c:4
+4   {
+(gdb) n
+6     printf("enter a number:");
+(gdb) n
+7     scanf("%f",&n);
+(gdb) n
+enter a number:100.00
+8     return n;
+(gdb) p n
+$1 = 100
+(gdb) n
+9   }
+(gdb) n
+main () at p5final.c:25
+25    sqres=my_sqrt(nsq);
+(gdb) s
+my_sqrt (n=100) at p5final.c:13
+13    sqrtn=sqrt(n);
+(gdb) n
+14    return sqrtn;
+(gdb) n
+15  }
+(gdb) p sqrtn
+$2 = 10
+(gdb) n
+main () at p5final.c:26
+26    output(nsq,sqres);
+(gdb) s
+output (n=100, sqrt_result=10) at p5final.c:18
+18    printf("the square root of a given number %f is %f",n,sqrt_result);
+(gdb) n
+20  }
+(gdb) n
+main () at p5final.c:27
+27  }(gdb) c
+Continuing.
+the square root of a given number 100.000000 is 10.000000[Inferior 1 (process 1164) exited normally]
+(gdb) 
